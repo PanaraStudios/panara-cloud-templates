@@ -1,0 +1,20 @@
+name: Check catalog
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  meta:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python3 scripts/build-meta.py
+      - name: meta.json is up to date
+        run: git diff --exit-code meta.json
