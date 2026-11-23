@@ -5,16 +5,32 @@ services:
     volumes:
       - redis_data:/data
 
+  # The published image runs as uid 1000 (node) and does not create
+  # /home/node/.flowise. A fresh named volume is root-owned, so this
+  # one-shot creates the data dirs and hands them to that user.
+  flowise-init:
+    image: flowiseai/flowise:3.1.3
+    user: "0:0"
+    restart: "no"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - mkdir -p /home/node/.flowise/logs /home/node/.flowise/storage && chown -R node:node /home/node/.flowise
+    volumes:
+      - flowise_data:/home/node/.flowise
+
   flowise:
-    image: flowiseai/flowise:latest
+    image: flowiseai/flowise:3.1.3
     restart: always
     expose:
       - 3000
     volumes:
-      - flowise_data:/root/.flowise
+      - flowise_data:/home/node/.flowise
     environment:
       PORT: 3000
-      DATABASE_PATH: /root/.flowise
+      DATABASE_PATH: /home/node/.flowise
+      SECRETKEY_PATH: /home/node/.flowise
+      LOG_PATH: /home/node/.flowise/logs
+      BLOB_STORAGE_PATH: /home/node/.flowise/storage
       REDIS_URL: redis://redis:6379
       JWT_AUTH_TOKEN_SECRET: ${JWT_AUTH_TOKEN_SECRET}
       JWT_REFRESH_TOKEN_SECRET: ${JWT_REFRESH_TOKEN_SECRET}
@@ -27,16 +43,22 @@ services:
       start_period: 30s
     entrypoint: /bin/sh -c "sleep 3; flowise start"
     depends_on:
-      - redis
+      redis:
+        condition: service_started
+      flowise-init:
+        condition: service_completed_successfully
 
   flowise-worker:
-    image: flowiseai/flowise-worker:latest
+    image: flowiseai/flowise-worker:3.1.3
     restart: always
     volumes:
-      - flowise_data:/root/.flowise
+      - flowise_data:/home/node/.flowise
     environment:
       WORKER_PORT: 5566
-      DATABASE_PATH: /root/.flowise
+      DATABASE_PATH: /home/node/.flowise
+      SECRETKEY_PATH: /home/node/.flowise
+      LOG_PATH: /home/node/.flowise/logs
+      BLOB_STORAGE_PATH: /home/node/.flowise/storage
       REDIS_URL: redis://redis:6379
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5566/healthz"]
@@ -46,8 +68,12 @@ services:
       start_period: 30s
     entrypoint: /bin/sh -c "node /app/healthcheck/healthcheck.js & sleep 5 && pnpm run start-worker"
     depends_on:
-      - redis
-      - flowise
+      redis:
+        condition: service_started
+      flowise-init:
+        condition: service_completed_successfully
+      flowise:
+        condition: service_started
 
 volumes:
   redis_data:

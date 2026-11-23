@@ -1,6 +1,6 @@
 services:
   peppermint-postgres:
-    image: postgres:latest
+    image: postgres:17
     restart: always
 
     volumes:

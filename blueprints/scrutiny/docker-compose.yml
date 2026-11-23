@@ -9,11 +9,12 @@ services:
       - 8086  # influxDB admin
     volumes:
       - /run/udev:/run/udev:ro
-      - ./config:/opt/scrutiny/config
-      - ./influxdb:/opt/scrutiny/influxdb
+      - ../files/config:/opt/scrutiny/config
+      - ../files/influxdb:/opt/scrutiny/influxdb
+    # The disks to watch must exist on the server, or the container cannot
+    # start. Add more lines for more disks (check with `lsblk`).
     devices:
-      - "/dev/sda"
-      - "/dev/sdb"
+      - "${SCRUTINY_DISK:-/dev/sda}"
 
 # PROXMOX USERS: Proxmox LXCs don't have access to S.M.A.R.T data, while this may be possible on VMs using PCI passthrough,
 # there's another way which is to run the scrutiny collector on proxmox host and have it send data to the scrutiny webapp running in an LXC or VM

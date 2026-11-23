@@ -43,7 +43,7 @@ services:
       retries: 5
 
   minio:
-    image: minio/minio:latest
+    image: pgsty/minio:RELEASE.2026-06-18T00-00-00Z
     restart: unless-stopped
     command: server /data --console-address ":9001"
     environment:
@@ -129,9 +129,9 @@ services:
       PLUNK_API_KEY: ${PLUNK_API_KEY}
       PLUNK_FROM_ADDRESS: ${PLUNK_FROM_ADDRESS}
 
-    volumes:
-      # Mount Traefik certificates for SSL
-      - /etc/panara-cloud/traefik/dynamic/acme.json:/certs/acme.json:ro
+    # SMTP (ports 465/587) starts without TLS. Do not mount Traefik's
+    # acme.json: it holds the private key for every site on the server.
+    # Bring your own certs if the SMTP relay must speak TLS.
 
     expose:
       - 80

@@ -36,7 +36,7 @@ services:
       - ps-mysql:/var/lib/mysql
 
   minio:
-    image: quay.io/minio/minio:RELEASE.2025-05-24T17-08-30Z
+    image: pgsty/minio:RELEASE.2026-06-18T00-00-00Z
     restart: unless-stopped
     command: server /bitnami/minio/data --address ":3902" --console-address ":3903"
     environment:

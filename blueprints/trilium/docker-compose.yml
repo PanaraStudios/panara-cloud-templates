@@ -5,5 +5,9 @@ services:
       - 8080
     restart: always
     volumes:
-      - /root/trilium-backups:/home/node/trilium-data/backup
-  
+      # The notes database lives in trilium-data; the original template kept
+      # only the backups (in the host's /root/trilium-backups).
+      - trilium-data:/home/node/trilium-data
+
+volumes:
+  trilium-data:

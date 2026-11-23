@@ -39,7 +39,7 @@ services:
       POSTGRES_DB: ${PEERDB_CATALOG_DATABASE}
       POSTGRES_INITDB_ARGS: --locale=C.UTF-8
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql
       - ../files/postgresql.conf:/etc/postgresql.conf
       - ../files/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     healthcheck:
@@ -164,7 +164,7 @@ services:
       - flow-api
 
   minio:
-    image: minio/minio:latest@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e
+    image: pgsty/minio:RELEASE.2026-06-18T00-00-00Z
     restart: unless-stopped
     volumes:
       - minio-data:/data

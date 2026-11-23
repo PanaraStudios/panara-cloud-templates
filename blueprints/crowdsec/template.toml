@@ -2,8 +2,21 @@
 auth_log_path = "/var/log/auth.log"
 
 [config]
-mounts = []
 domains = []
 
 [config.env]
 AUTH_LOG_PATH = "${auth_log_path}"
+
+[[config.mounts]]
+filePath = "acquis.yaml"
+content = """
+filenames:
+  - /var/log/traefik/access.log
+labels:
+  type: traefik
+---
+filenames:
+  - /var/log/ssh/auth.log
+labels:
+  type: syslog
+"""

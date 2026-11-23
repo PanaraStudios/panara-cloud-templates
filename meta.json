@@ -1201,7 +1201,7 @@
   {
     "id": "bytebase",
     "name": "Bytebase",
-    "version": "latest",
+    "version": "3.3.1",
     "description": "Bytebase is a database management tool that allows you to manage your databases with ease. It provides a simple and effective solution for managing your databases from anywhere.",
     "logo": "image.png",
     "links": {
@@ -3482,7 +3482,7 @@
   {
     "id": "flowise",
     "name": "Flowise",
-    "version": "latest",
+    "version": "3.1.3",
     "description": "Flowise is an open-source UI visual tool to build and run LLM-powered applications.",
     "logo": "image.png",
     "links": {
@@ -4527,7 +4527,7 @@
   {
     "id": "hoppscotch",
     "name": "Hoppscotch (AIO + Migrations)",
-    "version": "latest",
+    "version": "2026.11.0",
     "description": "Hoppscotch Community Edition (All-in-One) with automatic database migrations. Includes backend, frontend, and admin under unified subpath routing.",
     "logo": "image.png",
     "tags": [

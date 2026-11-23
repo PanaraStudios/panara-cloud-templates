@@ -3,9 +3,9 @@ services:
     image: busybox:1.37.0
     user: "0:0"
     volumes:
-      - ./seanime-config:/mnt/config
-      - ./anime:/mnt/anime
-      - ./downloads:/mnt/downloads
+      - ../files/seanime-config:/mnt/config
+      - ../files/anime:/mnt/anime
+      - ../files/downloads:/mnt/downloads
     command:
       [ "sh", "-c", "chown -R 1000:1000 /mnt/config && find /mnt/config -type d -exec chmod 755 {} + && find /mnt/config -type f -exec chmod 644 {} +",]
 
@@ -19,7 +19,7 @@ services:
     expose: 
       - "43211"
     volumes:
-      - ./seanime-config:/home/seanime/.config/Seanime
-      - ./anime:/anime
-      - ./downloads:/downloads
+      - ../files/seanime-config:/home/seanime/.config/Seanime
+      - ../files/anime:/anime
+      - ../files/downloads:/downloads
     restart: unless-stopped

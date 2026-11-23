@@ -5,7 +5,7 @@ PASSWORD = "${password:16}"
 [config]
 [[config.domains]]
 serviceName = "cloudcmd"
-port = 80
+port = 8000
 host = "${domain}"
 
 [config.env]

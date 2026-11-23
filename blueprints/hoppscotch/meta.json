@@ -1,7 +1,7 @@
 {
   "id": "hoppscotch",
   "name": "Hoppscotch (AIO + Migrations)",
-  "version": "latest",
+  "version": "2026.11.0",
   "description": "Hoppscotch Community Edition (All-in-One) with automatic database migrations. Includes backend, frontend, and admin under unified subpath routing.",
   "logo": "image.png",
   "tags": [

@@ -2,8 +2,8 @@ services:
   roundcubemail:
     image: roundcube/roundcubemail:1.6.9-apache
     volumes:
-      - ./www:/var/www/html
-      - ./db/sqlite:/var/roundcube/db
+      - ../files/www:/var/www/html
+      - ../files/db/sqlite:/var/roundcube/db
     environment:
       - ROUNDCUBEMAIL_DB_TYPE=sqlite
       - ROUNDCUBEMAIL_SKIN=elastic

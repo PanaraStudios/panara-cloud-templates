@@ -30,7 +30,7 @@ services:
     command: ["redis-server", "--maxmemory-policy", "noeviction"]
 
   usesend-storage-prod:
-    image: minio/minio:latest
+    image: pgsty/minio:RELEASE.2026-06-18T00-00-00Z
 
     expose:
       - 9002

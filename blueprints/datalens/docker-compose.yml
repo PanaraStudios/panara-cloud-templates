@@ -49,7 +49,7 @@ services:
       POSTGRES_USER: us
       POSTGRES_PASSWORD: us
     volumes:
-      - ${VOLUME_US:-./metadata}:/var/lib/postgresql/data
+      - ${VOLUME_US:-../files/metadata}:/var/lib/postgresql/data
 
   us:
     image: ghcr.io/datalens-tech/datalens-us:0.310.0
@@ -68,7 +68,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - ./certs:/certs
+      - ../files/certs:/certs
 
   datalens:
     image: ghcr.io/datalens-tech/datalens-ui:0.2601.0

@@ -5,7 +5,7 @@ services:
     expose:
       - 8581
     volumes:
-      - ./volumes/homebridge:/homebridge
+      - ../files/volumes/homebridge:/homebridge
     healthcheck:
       test: ["CMD", "curl", "-f", "http://homebridge:8581/"]
       interval: 60s

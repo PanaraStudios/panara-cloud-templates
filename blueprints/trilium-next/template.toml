@@ -2,9 +2,7 @@
 main_domain = "${domain}"
 
 [config]
-env = [
-"TRILIUM_DATA_DIR=/root"
-]
+env = []
 mount = []
 
 [[config.domains]]

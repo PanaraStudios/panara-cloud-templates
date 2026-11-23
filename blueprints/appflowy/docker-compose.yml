@@ -7,7 +7,7 @@ services:
 
   minio:
     restart: on-failure
-    image: minio/minio
+    image: pgsty/minio:RELEASE.2026-06-18T00-00-00Z
     environment:
       - MINIO_BROWSER_REDIRECT_URL=${APPFLOWY_BASE_URL}/minio
       - MINIO_ROOT_USER=${APPFLOWY_S3_ACCESS_KEY:-minioadmin}
@@ -31,7 +31,7 @@ services:
       retries: 12
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./files/volumes/postgres/:/docker-entrypoint-initdb.d/
+      - ../files/volumes/postgres/:/docker-entrypoint-initdb.d/
 
   redis:
     restart: on-failure

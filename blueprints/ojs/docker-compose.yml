@@ -17,7 +17,7 @@ services:
       - 80
       - 443
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
       - ojs-private-files:/var/www/files
       - ojs-public-files:/var/www/html/public
     depends_on:

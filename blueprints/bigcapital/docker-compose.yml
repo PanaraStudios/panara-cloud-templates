@@ -133,13 +133,10 @@ services:
       - '9000'
 volumes:
   mysql:
-    name: bigcapital_mysql
     driver: local
   mongo:
-    name: bigcapital_mongo
     driver: local
   redis:
-    name: bigcapital_redis
     driver: local
 
 
